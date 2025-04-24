@@ -1,17 +1,16 @@
 variable "project" {
-    type = "string"
-  
+  type = string
 }
+
 variable "zone" {
-    type = "string"
-    default = "us-central1-a"
-  
+  type    = string
+  default = "us-central1-a"
 }
+
 variable "name" {
-    type = "string"
-  
+  type = string
 }
+
 variable "image" {
-    type = "string"
-  
+  type = string
 }

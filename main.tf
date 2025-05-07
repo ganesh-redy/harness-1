@@ -1,6 +1,6 @@
 provider "google" {
     project = "sam-458313"
-    zone = "us-central1-a"
+    zone = "us-west1-a"
 
   
 }
@@ -10,7 +10,7 @@ resource "google_compute_instance" "instance1" {
     boot_disk {
         initialize_params {
           image = "centos-stream-9"
-          size = 30
+         
         }
     
     }   

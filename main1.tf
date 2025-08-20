@@ -1,11 +1,11 @@
 provider "google" {
-    project = "sam-458313"
+    project = "project-k-467310"
     zone = "us-west1-c"
 
   
 }
 resource "google_compute_instance" "instance1" {
-    name = "instance-5"
+    name = "instance-99"
     machine_type = "e2-micro"
     boot_disk {
         initialize_params {

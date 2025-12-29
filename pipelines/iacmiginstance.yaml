@@ -39,27 +39,24 @@ pipeline:
                   name: IACMApproval_2
                   identifier: IACMApproval_2
                   spec: {}
-              - step:
-                  type: IACMTerraformPlugin
-                  name: destroy
-                  identifier: destroy
-                  timeout: 1h
-                  spec:
-                    command: destroy
-              - step:
-                  type: IACMTerraformPlugin
-                  name: IACMTerraformPlugin_4
-                  identifier: IACMTerraformPlugin_4
-                  spec:
-                    command: init
-                  timeout: 10m
-              - step:
-                  type: IACMApproval
-                  name: IACMApproval_1
-                  identifier: IACMApproval_1
-                  spec:
-                    autoApprove: false
-                  timeout: 1h
+              - parallel:
+                  - step:
+                      type: IACMTerraformPlugin
+                      name: destroy
+                      identifier: destroy
+                      timeout: 1h
+                      spec:
+                        command: destroy
+                      when:
+                        stageStatus: Success
+                        condition: <+pipeline.variables.choose> == "destroy"
+                  - step:
+                      type: IACMTerraformPlugin
+                      name: apply
+                      identifier: apply
+                      spec:
+                        command: apply
+                      timeout: 1h
         tags: {}
         delegateSelectors:
           - docker-delegate-ganesh25-instance
@@ -96,3 +93,9 @@ pipeline:
         connectorRef: githubconnectganeshtest
         repoName: disk-partition-vms-ansible-harness
         build: <+input>
+  variables:
+    - name: choose
+      type: String
+      description: ""
+      required: false
+      value: <+input>.default(apply).selectOneFrom(apply,destroy)

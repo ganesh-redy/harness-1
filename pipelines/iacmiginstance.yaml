@@ -77,7 +77,7 @@ pipeline:
             os: Linux
             arch: Amd64
           runtime:
-            type: Cloud
+            type: Docker
             spec: {}
           execution:
             steps:
@@ -87,7 +87,9 @@ pipeline:
                   identifier: Run_1
                   spec:
                     shell: Sh
-                    command: apt install java-17
+                    command: |-
+                      apt install java-17
+                      mvn clean package
   properties:
     ci:
       codebase:

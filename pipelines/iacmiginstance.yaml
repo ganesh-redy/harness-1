@@ -57,6 +57,9 @@ pipeline:
                       spec:
                         command: apply
                       timeout: 1h
+                      when:
+                        stageStatus: Success
+                        condition: <+pipeline.variables.choose> == "apply"
         tags: {}
         delegateSelectors:
           - docker-delegate-ganesh25-instance

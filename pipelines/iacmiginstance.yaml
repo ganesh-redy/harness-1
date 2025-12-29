@@ -35,10 +35,31 @@ pipeline:
                   spec:
                     command: plan
               - step:
+                  type: IACMApproval
+                  name: IACMApproval_2
+                  identifier: IACMApproval_2
+                  spec: {}
+              - step:
                   type: IACMTerraformPlugin
                   name: destroy
                   identifier: destroy
                   timeout: 1h
                   spec:
                     command: destroy
+              - step:
+                  type: IACMTerraformPlugin
+                  name: IACMTerraformPlugin_4
+                  identifier: IACMTerraformPlugin_4
+                  spec:
+                    command: init
+                  timeout: 10m
+              - step:
+                  type: IACMApproval
+                  name: IACMApproval_1
+                  identifier: IACMApproval_1
+                  spec:
+                    autoApprove: false
+                  timeout: 1h
         tags: {}
+        delegateSelectors:
+          - docker-delegate-ganesh25-instance

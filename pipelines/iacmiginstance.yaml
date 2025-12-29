@@ -60,6 +60,24 @@ pipeline:
                       when:
                         stageStatus: Success
                         condition: <+pipeline.variables.choose> == "apply"
+              - stepGroup:
+                  name: stepgroup_1
+                  identifier: stepgroup_1
+                  steps:
+                    - step:
+                        type: Run
+                        name: Run_1
+                        identifier: Run_1
+                        spec:
+                          shell: Sh
+                          command: echo "hai"
+                    - step:
+                        type: Run
+                        name: Run_2
+                        identifier: Run_2
+                        spec:
+                          shell: Sh
+                          command: echo "no"
         tags: {}
         delegateSelectors:
           - docker-delegate-ganesh25-instance

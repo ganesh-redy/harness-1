@@ -1,5 +1,5 @@
 provider "google" {
-    project = "project-k-467310"
+    project = "sam-494514"
     zone = "us-west1-c"
 
   
